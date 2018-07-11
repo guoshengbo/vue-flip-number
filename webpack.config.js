@@ -1,44 +1,50 @@
-// config for webpack v3
 
-const webpack = require('webpack')
 const path = require('path')
-const PROD = process.env.NODE_ENV === 'production'
-
+const webpack = require('webpack')
+// const uglify = require('uglifyjs-webpack-plugin')
 module.exports = {
-  entry: path.join(__dirname, '/src/FlipCountdown.vue'),
+  devtool: 'source-map',
+  entry: './src/index.js', // 入口文件，就是上步骤的src目录下的index.js文件，
   output: {
-    path: path.join(__dirname, '/dist/'),
-    filename: 'vue2-flip-countdown.js',
-
+    path: path.resolve(__dirname, './dist'), // 输出路径，就是上步骤中新建的dist目录，
+    publicPath: '/dist/',
+    filename: 'main.min.js',
     libraryTarget: 'umd',
-    library: 'vue2-flip-countdown',
     umdNamedDefine: true
   },
   module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            js: {
-              loader: 'babel-loader',
-              options: { presets: ['env'] }
-            },
-            less: 'vue-style-loader!css-loader!less-loader'
-          }
-        }
+    rules: [{
+      test: /\.vue$/,
+      loader: 'vue-loader'
+    },
+    {
+      test: /\.less$/,
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader' },
+        { loader: 'less-loader' }
+      ]
+    },
+    {
+      test: /\.js$/,
+      exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
+      loader: 'babel-loader'
+    },
+    {
+      test: /\.(png|jpg|gif|ttf|svg|woff|eot)$/,
+      loader: 'url-loader',
+      query: {
+        limit: 30000,
+        name: '[name].[ext]?[hash]'
       }
+    }
     ]
   },
-  plugins: PROD ? [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: !!PROD,
-      sourceMap: !PROD,
-      mangle: !!PROD,
-      compress: {
-        warnings: !PROD
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
       }
     })
-  ] : []
+  ]
 }
