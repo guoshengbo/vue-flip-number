@@ -2,9 +2,6 @@
 
 基于 Vue 2.x 的数字切换组件
 
-![screenshot](https://github.com/guoshengbo/vue-flip-number)
-
-
 ## 安装
 
 ```
