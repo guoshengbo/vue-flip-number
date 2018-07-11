@@ -1,4 +1,4 @@
-# vue2-flip-countdown
+# vue-flip-number
 
 基于 Vue 2.x 的数字切换组件
 
@@ -13,7 +13,7 @@ npm i vue-flip-number --save
 ```vue
 <template>
   <div>
-    <flip :deadline="99999" :length="length"></flip>
+    <flip :deadline="deadline" :length="length"></flip>
   </div>
 </template>
 
@@ -29,6 +29,8 @@ npm i vue-flip-number --save
   }
 </script>
 ```
+deadline:显示的数字
+length：
 # 参考
 
 - [vuejs-countdown](https://github.com/getanwar/vuejs-countdown)
