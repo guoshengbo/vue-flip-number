@@ -22,15 +22,15 @@ npm i vue-flip-number --save
 
   export default {
       data () {
-        deadline: 112321322,
+        deadline: 999999,
         length: 10
       }
       components: { Flip }
   }
 </script>
 ```
-deadline:显示的数字
-length：
+deadline（number）:需显示的数字
+length（number）：一共显示多少位（不能小于deadline长度，多出部分填充0显示）
 # 参考
 
 - [vuejs-countdown](https://github.com/getanwar/vuejs-countdown)
